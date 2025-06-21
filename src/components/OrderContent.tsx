@@ -1,13 +1,15 @@
 import {Fragment} from "react";
-import type {MenuItem, OrderItem} from "../types";
+import type {OrderItem} from "../types";
 import {formatCurrency} from "../helpers";
+import type {AccionesOrdern} from "../reducers/orden_Reducer.ts";
 
 type OrderContentProps = {
     orden: OrderItem[],
-    removeItem: (id: MenuItem['id']) => void
+    // removeItem: (id: MenuItem['id']) => void
+    dispatch:  React.ActionDispatch<[acciones: AccionesOrdern]>
 }
 
-const OrderContent = ({orden, removeItem}: OrderContentProps) => {
+const OrderContent = ({orden, dispatch}: OrderContentProps) => {
 
     return (
         <Fragment>
@@ -29,7 +31,8 @@ const OrderContent = ({orden, removeItem}: OrderContentProps) => {
                                             <button
                                                 className="bg-red-600 h-8 w-8 rounded-full text-white font-black"
                                                 onClick={() => {
-                                                    removeItem(item.id);
+                                                    // removeItem(item.id);
+                                                    dispatch({type: "removeItem", payload: {id: item.id}})
                                                 }}
                                             >
                                                 X

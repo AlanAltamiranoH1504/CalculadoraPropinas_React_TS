@@ -1,5 +1,6 @@
 import {Fragment} from "react";
 import type {Propina} from "../types";
+import type {AccionesOrdern} from "../reducers/orden_Reducer.ts";
 const tipOptions: Propina[] = [
     {
         id: 'tip-10',
@@ -19,10 +20,11 @@ const tipOptions: Propina[] = [
 ]
 
 type PropinasFormularioProps = {
-    setPropina:  React.Dispatch<React.SetStateAction<number>>
+    // setPropina:  React.Dispatch<React.SetStateAction<number>>,
+    dispatch:  React.ActionDispatch<[acciones: AccionesOrdern]>
 }
 
-const PropinasFormulario = ({setPropina}: PropinasFormularioProps) => {
+const PropinasFormulario = ({dispatch}: PropinasFormularioProps) => {
 
     return (
         <Fragment>
@@ -43,7 +45,8 @@ const PropinasFormulario = ({setPropina}: PropinasFormularioProps) => {
                                     name="propina"
                                     onChange={(e) => {
                                         // calcularPropina(opcion.value);
-                                        setPropina(+e.target.value);
+                                        // setPropina(+e.target.value);
+                                        dispatch({type: "agregarPropina", payload: {value: +e.target.value}})
                                     }}
                                 />
                             </div>
